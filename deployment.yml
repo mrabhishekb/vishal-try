@@ -1,0 +1,35 @@
+version: v1alpha
+name: customer-analytics-lens-vishal
+layer: user
+type: lens
+tags:
+  - lens
+  - Domain.Customers
+  - DPTier.Consumer Aligned
+description: Semantic model for customer segmentation, lifetime value, and engagement analytics
+owner: hrudayvishalbanda
+lens:
+  compute: runnable-default
+  secrets:
+    - name: github-lens-r
+      allKeys: true
+  source:
+    type: minerva
+    name: system
+    catalog: icebase
+  repo:
+    url: https://github.com/bandahrudayvishaltmdc/customer-analytics-lens-vishal
+    lensBaseDir: customer-analytics-lens-vishal/model
+    secretId: github_lens_r_r
+    syncFlags:
+      - --ref=main
+  api:
+    replicas: 1
+    logLevel: info
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
