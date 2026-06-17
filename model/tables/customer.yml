@@ -37,6 +37,16 @@ tables:
         column: acquisition_source
         description: How the customer was acquired.
 
+      - name: lifetime_value
+        type: number
+        column: lifetime_value
+        description: Customer lifetime value.
+
+      - name: total_orders
+        type: number
+        column: total_orders
+        description: Total orders placed by the customer.
+
     measures:
       - name: total_customers
         sql: COUNT(DISTINCT {customer_id})

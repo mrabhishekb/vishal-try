@@ -31,6 +31,11 @@ tables:
         column: country
         description: Customer country.
 
+      - name: engagement_score
+        type: number
+        column: engagement_score
+        description: Computed engagement score.
+
     measures:
       - name: avg_engagement_score
         sql: AVG({engagement_score})

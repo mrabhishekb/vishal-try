@@ -20,6 +20,21 @@ tables:
         column: status
         description: Customer status grouping.
 
+      - name: customer_count
+        type: number
+        column: customer_count
+        description: Customer count in the segment slice.
+
+      - name: total_lifetime_value
+        type: number
+        column: total_lifetime_value
+        description: Total lifetime value in the segment slice.
+
+      - name: avg_lifetime_value
+        type: number
+        column: avg_lifetime_value
+        description: Average lifetime value in the segment slice.
+
     measures:
       - name: segment_customer_count
         sql: SUM({customer_count})
