@@ -1,0 +1,43 @@
+tables:
+  - name: engagement
+    sql: {{ load_sql('engagement') }}
+    description: Per-customer engagement scores and cross-sell recommendations.
+    public: true
+
+    dimensions:
+      - name: customer_id
+        type: string
+        column: customer_id
+        description: Unique customer identifier.
+        primary_key: true
+
+      - name: engagement_risk_segment
+        type: string
+        column: engagement_risk_segment
+        description: High, Moderate, or Low engagement risk.
+
+      - name: cross_sell_recommendation
+        type: string
+        column: cross_sell_recommendation
+        description: Recommended next-best action.
+
+      - name: customer_segment
+        type: string
+        column: customer_segment
+        description: Customer tier.
+
+      - name: country
+        type: string
+        column: country
+        description: Customer country.
+
+    measures:
+      - name: avg_engagement_score
+        sql: AVG({engagement_score})
+        type: number
+        description: Average engagement score.
+
+      - name: high_risk_customers
+        sql: COUNT(DISTINCT CASE WHEN {engagement_risk_segment} = 'High Risk' THEN {customer_id} END)
+        type: number
+        description: Count of high-risk customers.

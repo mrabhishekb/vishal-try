@@ -1,0 +1,37 @@
+tables:
+  - name: segment_analytics
+    sql: {{ load_sql('segment_analytics') }}
+    description: Aggregated KPIs by segment, country, and status.
+    public: true
+
+    dimensions:
+      - name: customer_segment
+        type: string
+        column: customer_segment
+        description: Customer segment grouping.
+
+      - name: country
+        type: string
+        column: country
+        description: Country grouping.
+
+      - name: status
+        type: string
+        column: status
+        description: Customer status grouping.
+
+    measures:
+      - name: segment_customer_count
+        sql: SUM({customer_count})
+        type: number
+        description: Total customers in the segment slice.
+
+      - name: segment_total_lifetime_value
+        sql: SUM({total_lifetime_value})
+        type: number
+        description: Total lifetime value for the segment slice.
+
+      - name: segment_avg_lifetime_value
+        sql: AVG({avg_lifetime_value})
+        type: number
+        description: Average lifetime value for the segment slice.

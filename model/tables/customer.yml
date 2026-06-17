@@ -1,0 +1,59 @@
+tables:
+  - name: customer
+    sql: {{ load_sql('customer') }}
+    description: Clean customer records from source-aligned customer-vishal data product.
+    public: true
+
+    joins:
+      - name: engagement
+        relationship: one_to_one
+        sql: "{TABLE.customer_id} = {engagement.customer_id}"
+
+    dimensions:
+      - name: customer_id
+        type: string
+        column: customer_id
+        description: Unique customer identifier.
+        primary_key: true
+        public: true
+
+      - name: customer_segment
+        type: string
+        column: customer_segment
+        description: Gold, Silver, Bronze, or Standard tier.
+
+      - name: country
+        type: string
+        column: country
+        description: Customer country.
+
+      - name: status
+        type: string
+        column: status
+        description: Active or Inactive.
+
+      - name: acquisition_source
+        type: string
+        column: acquisition_source
+        description: How the customer was acquired.
+
+    measures:
+      - name: total_customers
+        sql: COUNT(DISTINCT {customer_id})
+        type: number
+        description: Count of distinct customers.
+
+      - name: total_lifetime_value
+        sql: SUM({lifetime_value})
+        type: number
+        description: Sum of customer lifetime value.
+
+      - name: avg_lifetime_value
+        sql: AVG({lifetime_value})
+        type: number
+        description: Average lifetime value per customer.
+
+      - name: avg_total_orders
+        sql: AVG({total_orders})
+        type: number
+        description: Average order count per customer.

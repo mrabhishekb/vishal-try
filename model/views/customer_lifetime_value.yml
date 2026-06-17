@@ -1,0 +1,60 @@
+views:
+  - name: customer_lifetime_value
+    description: Customer lifetime value and order metrics for business reporting.
+    public: true
+    meta:
+      title: Customer Lifetime Value
+      tags:
+        - DPDomain.Customers
+        - DPUsecase.Customer Segmentation
+        - DPTier.Consumer Aligned
+    tables:
+      - join_path: customer
+        prefix: true
+        includes:
+          - customer_id
+          - customer_segment
+          - country
+          - status
+          - total_lifetime_value
+          - avg_lifetime_value
+          - avg_total_orders
+
+  - name: segment_performance
+    description: Segment-level performance across countries and status groups.
+    public: true
+    meta:
+      title: Segment Performance
+      tags:
+        - DPDomain.Customers
+        - DPUsecase.Customer Segmentation
+        - DPTier.Consumer Aligned
+    tables:
+      - join_path: segment_analytics
+        prefix: true
+        includes:
+          - customer_segment
+          - country
+          - status
+          - segment_customer_count
+          - segment_total_lifetime_value
+          - segment_avg_lifetime_value
+
+  - name: engagement_opportunities
+    description: Engagement risk and cross-sell recommendations for marketing teams.
+    public: true
+    meta:
+      title: Engagement Opportunities
+      tags:
+        - DPDomain.Customers
+        - DPUsecase.Customer Segmentation
+        - DPTier.Consumer Aligned
+    tables:
+      - join_path: engagement
+        prefix: true
+        includes:
+          - customer_id
+          - engagement_risk_segment
+          - cross_sell_recommendation
+          - avg_engagement_score
+          - high_risk_customers
